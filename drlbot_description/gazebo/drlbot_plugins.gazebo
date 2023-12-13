@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<robot name="drlbot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<gazebo>
+  <plugin name="control" filename="libgazebo_ros_control.so"/>
+</gazebo>
+
+<!--Differential Drive-->
+<gazebo>
+  <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+    <updateRate>10.0</updateRate> <!-- Plugin update rate in Hz -->
+    <leftJoint>motor_left</leftJoint> <!-- Name of left joint, defaults to `left_joint` -->
+    <rightJoint>motor_right</rightJoint> <!-- Name of right joint, defaults to `right_joint` -->
+    <wheelSeparation>0.161804</wheelSeparation> <!-- The distance from the center of one wheel to the other, in meters, defaults to 0.34 m -->
+    <wheelDiameter>0.066</wheelDiameter> <!-- Diameter of the wheels, in meters, defaults to 0.15 m -->
+    <wheelAcceleration>1.0</wheelAcceleration> <!-- Wheel acceleration, in rad/s^2, defaults to 0.0 rad/s^2 -->
+    <wheelTorque>20</wheelTorque> <!-- Maximum torque which the wheels can produce, in Nm, defaults to 5 Nm -->
+    <commandTopic>cmd_vel</commandTopic> <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
+    <odometryTopic>odom</odometryTopic> <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
+    <odometryFrame>odom</odometryFrame> <!-- Odometry frame, defaults to `odom` -->
+    <robotBaseFrame>base_footprint</robotBaseFrame> <!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->
+    <odometrySource>encoder</odometrySource> <!-- Odometry source, 0 for ENCODER, 1 for WORLD, defaults to WORLD -->
+    <publishWheelTF>true</publishWheelTF> <!-- Set to true to publish transforms for the wheel links, defaults to false -->
+    <publishOdom>true</publishOdom> <!-- Set to true to publish transforms for the odometry, defaults to true -->
+    <publishWheelJointState>true</publishWheelJointState> <!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
+    <legacyMode>false</legacyMode> <!-- Set to true to swap right and left wheels, defaults to true -->
+    <rosDebugLevel>na</rosDebugLevel>
+    <publishOdomTF>true</publishOdomTF>
+    <publishTf>true</publishTf>
+  </plugin>
+</gazebo>
+
+<!-- LIDAR -->
+<gazebo reference="lidar_1">
+  <sensor type="ray" name="lidar_sensor">
+    <pose>0 0 0 0 0 0</pose>
+    <visualize>true</visualize>
+    <update_rate>40</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>720</samples>
+          <resolution>1</resolution>
+          <min_angle>-3.14159</min_angle>
+          <max_angle>3.14159</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.10</min>
+        <max>6.00</max>
+        <resolution>0.01</resolution>
+      </range>
+      <noise>
+        <type>gaussian</type>
+        <mean>0.0</mean>
+        <stddev>0.01</stddev>
+      </noise>
+    </ray>
+    <plugin name="gazebo_ros_lidar_controller" filename="libgazebo_ros_laser.so">
+      <topicName>/drlbot/laser/scan</topicName>
+      <frameName>lidar_1</frameName>
+    </plugin>
+  </sensor>
+</gazebo>
+
+</robot>

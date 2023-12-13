@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<robot name="drlbot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<material name="silver_default">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+<material name="opaque898684">
+  <color rgba="0.34901960784313724 0.33725490196078434 0.32941176470588235 1.0"/>
+</material>
+<material name="steel_satin">
+  <color rgba="0.6274509803921569 0.6274509803921569 0.6274509803921569 1.0"/>
+</material>
+<material name="coating_black_oxide">
+  <color rgba="0.0 0.0 0.0 1.0"/>
+</material>
+
+</robot>

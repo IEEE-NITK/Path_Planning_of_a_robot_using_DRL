@@ -1,0 +1,147 @@
+<?xml version="1.0" ?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find drlbot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find drlbot_description)/urdf/drlbot.trans" />
+<xacro:include filename="$(find drlbot_description)/gazebo/drlbot_materials.gazebo" />
+<xacro:include filename="$(find drlbot_description)/gazebo/drlbot_physics.gazebo" />
+<xacro:include filename="$(find drlbot_description)/gazebo/drlbot_plugins.gazebo" />
+
+<link name="base_footprint"/>
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0028609830961275496 -0.00028636548319819235 0.07416570528182598" rpy="0 0 0"/>
+    <mass value="5.29438449002"/>
+    <inertia ixx="0.018437" iyy="0.018264" izz="0.012718" ixy="4e-05" iyz="5.8e-05" ixz="0.000436"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="opaque898684"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_right_1">
+  <inertial>
+    <origin xyz="1.4796994004112607e-06 -0.00781748340988625 8.287650255650592e-08" rpy="0 0 0"/>
+    <mass value="0.2346100571054497"/>
+    <inertia ixx="9e-05" iyy="0.000167" izz="9e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.03275 0.0722 -0.033" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/wheel_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="steel_satin"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.03275 0.0722 -0.033" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/wheel_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_left_1">
+  <inertial>
+    <origin xyz="1.4796994003002384e-06 0.007817483409885487 -8.287650261201707e-08" rpy="0 0 0"/>
+    <mass value="0.2346100571054497"/>
+    <inertia ixx="9e-05" iyy="0.000167" izz="9e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.03275 -0.0722 -0.0333" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/wheel_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="steel_satin"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.03275 -0.0722 -0.0333" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/wheel_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_caster_1">
+  <inertial>
+    <origin xyz="-0.045000594596254544 1.735967801928781e-05 -0.00355326377799727" rpy="0 0 0"/>
+    <mass value="0.0054901244015141525"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 0.0 -0.01105" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/wheel_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="steel_satin"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 0.0 -0.01105" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/wheel_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="-0.008711210990347865 -9.19261111398959e-05 0.03526812773284044" rpy="0 0 0"/>
+    <mass value="1.3392997077576572"/>
+    <inertia ixx="0.000619" iyy="0.000967" izz="0.001105" ixy="-1e-06" iyz="-3e-06" ixz="0.000159"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.15105" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="coating_black_oxide"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.15105" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://drlbot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_joint" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+</joint>
+
+<joint name="motor_right" type="continuous">
+  <origin xyz="0.03275 -0.0722 0.033" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_right_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="motor_left" type="continuous">
+  <origin xyz="0.03275 0.0722 0.0333" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_left_1"/>
+  <axis xyz="-0.0 1.0 -0.0"/>
+</joint>
+
+<joint name="caster_joint" type="fixed">
+  <origin xyz="0.0 0.0 0.01105" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_caster_1"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="0.0 0.0 0.15105" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+</robot>

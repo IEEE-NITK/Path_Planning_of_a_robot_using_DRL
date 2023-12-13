@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<robot name="drlbot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<xacro:property name="standard_friction" value="0.2" />
+<xacro:property name="wheel_friction" value="100" />
+
+<gazebo reference="base_link">
+  <mu1>${standard_friction}</mu1>
+  <mu2>${standard_friction}</mu2>
+  <selfCollide>true</selfCollide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="wheel_right_1">
+  <mu1>${wheel_friction}</mu1>
+  <mu2>${wheel_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="wheel_left_1">
+  <mu1>${wheel_friction}</mu1>
+  <mu2>${wheel_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="wheel_caster_1">
+  <mu1>${standard_friction}</mu1>
+  <mu2>${standard_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="lidar_1">
+  <mu1>${standard_friction}</mu1>
+  <mu2>${standard_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+</robot>

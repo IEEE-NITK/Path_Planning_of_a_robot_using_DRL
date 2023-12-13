@@ -1,0 +1,20 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/dev-ubuntu/eyrc_hb/hb_task1b_ws/install/my_robot_interfaces/local/lib/python3.10/dist-packages",
+        "/home/dev-ubuntu/eyrc_hb/hb_task1b_ws/install/hb_task_1b/lib/python3.10/site-packages",
+        "/home/dev-ubuntu/robot_drl_ws/install/robot_description/lib/python3.10/site-packages",
+        "/home/dev-ubuntu/ros2_ws/build/my_robot_controller",
+        "/home/dev-ubuntu/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/dev-ubuntu/eyrc_hb/hb_task1b_ws/install/my_robot_interfaces/local/lib/python3.10/dist-packages",
+        "/home/dev-ubuntu/eyrc_hb/hb_task1b_ws/install/hb_task_1b/lib/python3.10/site-packages",
+        "/home/dev-ubuntu/robot_drl_ws/install/robot_description/lib/python3.10/site-packages",
+        "/home/dev-ubuntu/ros2_ws/build/my_robot_controller",
+        "/home/dev-ubuntu/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
