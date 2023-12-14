@@ -16,21 +16,21 @@ def generate_launch_description():
     robot_description_config = xacro.process_file(xacro_file)
     robot_urdf = robot_description_config.toxml()
     
+    
     return LaunchDescription([
         DeclareLaunchArgument('paused', default_value='true'),
         DeclareLaunchArgument('use_sim_time', default_value='true'),
         DeclareLaunchArgument('gui', default_value='true'),
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('debug', default_value='false'),
-      
-        
+        DeclareLaunchArgument('rvizconfig', default_value=PathJoinSubstitution([share_dir, 'rviz', 'urdf.rviz']), description='RViz configuration file'),
 
         Node(
             package='gazebo_ros',
             executable='spawn_entity.py',
-            name='spawn_urdf',
+            name='spawn_entity',
             output='screen',
-            arguments=['-topic','robot_description','-entity','spawn_urdf','-x', '0.0', '-y', '0.0', '-z', '0.0'],
+            arguments=['-topic','/robot_description','-entity','spawn_urdf','-x','0.0','-y','0.0','-z','0.0'],
         ),
         
         Node(
@@ -73,4 +73,11 @@ def generate_launch_description():
                 ]),
             ])
         ),
+        # Node(
+        #     package='rviz2',
+        #     executable='rviz2',
+        #     name='rviz',
+        #     output='screen',
+        #     arguments=['-d', LaunchConfiguration('rvizconfig')]
+        # ),
     ])

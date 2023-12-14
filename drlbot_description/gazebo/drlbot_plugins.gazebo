@@ -8,25 +8,33 @@
 <!--Differential Drive-->
 <gazebo>
   <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-    <updateRate>10.0</updateRate> <!-- Plugin update rate in Hz -->
-    <leftJoint>motor_left</leftJoint> <!-- Name of left joint, defaults to `left_joint` -->
-    <rightJoint>motor_right</rightJoint> <!-- Name of right joint, defaults to `right_joint` -->
-    <wheelSeparation>0.161804</wheelSeparation> <!-- The distance from the center of one wheel to the other, in meters, defaults to 0.34 m -->
-    <wheelDiameter>0.066</wheelDiameter> <!-- Diameter of the wheels, in meters, defaults to 0.15 m -->
-    <wheelAcceleration>1.0</wheelAcceleration> <!-- Wheel acceleration, in rad/s^2, defaults to 0.0 rad/s^2 -->
-    <wheelTorque>20</wheelTorque> <!-- Maximum torque which the wheels can produce, in Nm, defaults to 5 Nm -->
-    <commandTopic>cmd_vel</commandTopic> <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
-    <odometryTopic>odom</odometryTopic> <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
-    <odometryFrame>odom</odometryFrame> <!-- Odometry frame, defaults to `odom` -->
-    <robotBaseFrame>base_footprint</robotBaseFrame> <!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->
-    <odometrySource>encoder</odometrySource> <!-- Odometry source, 0 for ENCODER, 1 for WORLD, defaults to WORLD -->
-    <publishWheelTF>true</publishWheelTF> <!-- Set to true to publish transforms for the wheel links, defaults to false -->
-    <publishOdom>true</publishOdom> <!-- Set to true to publish transforms for the odometry, defaults to true -->
-    <publishWheelJointState>true</publishWheelJointState> <!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
-    <legacyMode>false</legacyMode> <!-- Set to true to swap right and left wheels, defaults to true -->
-    <rosDebugLevel>na</rosDebugLevel>
-    <publishOdomTF>true</publishOdomTF>
-    <publishTf>true</publishTf>
+    
+    <update_rate>10.0</update_rate> <!-- Plugin update rate in Hz -->
+
+    <left_joint>motor_left</left_joint> <!-- Name of left joint, defaults to `left_joint` -->
+    <right_joint>motor_right</right_joint> <!-- Name of right joint, defaults to `right_joint` -->
+    
+    <wheel_separation>0.161804</wheel_separation> <!-- The distance from the center of one wheel to the other, in meters, defaults to 0.34 m -->
+    <wheel_diameter>0.066</wheel_diameter> <!-- Diameter of the wheels, in meters, defaults to 0.15 m -->
+    
+    <wheel_acceleration>1.0</wheel_acceleration> <!-- Wheel acceleration, in rad/s^2, defaults to 0.0 rad/s^2 -->
+    <wheel_torque>20</wheel_torque> <!-- Maximum torque which the wheels can produce, in Nm, defaults to 5 Nm -->
+    
+    <command_topic>cmd_vel</command_topic> <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
+    
+    <odometry_topic>odom</odometry_topic> <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
+    <odometry_frame>odom</odometry_frame> <!-- Odometry frame, defaults to `odom` -->
+    <robot_base_frame>base_footprint</robot_base_frame> <!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->
+    
+    <odometry_source>0</odometry_source> <!-- Odometry source, 0 for ENCODER, 1 for WORLD, defaults to WORLD -->
+    
+    <publish_wheel_tf>true</publish_wheel_tf> <!-- Set to true to publish transforms for the wheel links, defaults to false -->
+    <publish_odom>true</publish_odom> <!-- Set to true to publish transforms for the odometry, defaults to true -->
+    <publish_wheel_joint_state>true</publish_wheel_joint_state> <!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
+    <legacy_mode>false</legacy_mode> <!-- Set to true to swap right and left wheels, defaults to true -->
+    <ros_debug_level>na</ros_debug_level>
+    <publish_odom_tf>true</publish_odom_tf>
+    <publish_tf>true</publish_tf>
   </plugin>
 </gazebo>
 

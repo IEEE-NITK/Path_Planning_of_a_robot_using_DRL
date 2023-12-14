@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="drlbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <xacro:include filename="$(find drlbot_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find drlbot_description)/urdf/drlbot.trans" />
