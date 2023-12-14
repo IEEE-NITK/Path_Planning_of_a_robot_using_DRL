@@ -1,0 +1,47 @@
+******FOR ADDING FILES*****
+1. git add . 
+2. git commit -m "commit message"
+3. git push
+
+
+******FOR CLONING REPO*****
+1. make repo
+2. copy clone link
+3. goto location in git bash
+4. git clone <shift+ins>
+5. cd <cloned-dir>
+6. copy file to cloned dir
+7. git add . 
+8. git commit -m "commit message"
+9. git push
+   yayyyyyy
+
+***git status
+
+*git init
+*git add .
+*git add <file/folder-name>
+*git branch "<branch-name>" 		#creates branch
+*git branch -a				#lists all branches
+*git checkout "<branch-name>"		#switches to branch
+*git checkout -b "<branch-name>"	#creates and switches to branch
+*git merge <branch-to-merge>		#
+*git merge onto <branch-merged>
+
+
+
+***** *****
+*git init
+*git add .
+*git remote add origin <pre-existing-repo-link>
+*git push -u origin main
+
+
+*git fetch				#updates local repo from remote
+*git pull 				#pulls and merges(?)
+*git push
+
+*git log				#shows commit history and hashes
+*git revert <prev-commit-hash>		#reverts to prev commit
+
+
