@@ -9,7 +9,7 @@
 <gazebo>
   <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
     
-    <update_rate>10.0</update_rate> <!-- Plugin update rate in Hz -->
+    <update_rate>30.0</update_rate> <!-- Plugin update rate in Hz -->
 
     <left_joint>motor_left</left_joint> <!-- Name of left joint, defaults to `left_joint` -->
     <right_joint>motor_right</right_joint> <!-- Name of right joint, defaults to `right_joint` -->
@@ -26,13 +26,13 @@
     <odometry_frame>odom</odometry_frame> <!-- Odometry frame, defaults to `odom` -->
     <robot_base_frame>base_footprint</robot_base_frame> <!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->
     
-    <odometry_source>0</odometry_source> <!-- Odometry source, 0 for ENCODER, 1 for WORLD, defaults to WORLD -->
+    <!-- <odometrySource>world</odometrySource> Odometry source, 0 for ENCODER, 1 for WORLD, defaults to WORLD -->
     
     <publish_wheel_tf>true</publish_wheel_tf> <!-- Set to true to publish transforms for the wheel links, defaults to false -->
     <publish_odom>true</publish_odom> <!-- Set to true to publish transforms for the odometry, defaults to true -->
     <publish_wheel_joint_state>true</publish_wheel_joint_state> <!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
-    <legacy_mode>false</legacy_mode> <!-- Set to true to swap right and left wheels, defaults to true -->
-    <ros_debug_level>na</ros_debug_level>
+    <legacy_mode>false</legacy_mode> Set to true to swap right and left wheels, defaults to true
+    <!-- <ros_debug_level>na</ros_debug_level> -->
     <publish_odom_tf>true</publish_odom_tf>
     <publish_tf>true</publish_tf>
   </plugin>
@@ -42,19 +42,20 @@
 <gazebo reference="lidar_1">
   <sensor type="ray" name="lidar_sensor">
     <pose>0 0 0 0 0 0</pose>
+    <always_on>true</always_on>
     <visualize>true</visualize>
     <update_rate>40</update_rate>
     <ray>
       <scan>
         <horizontal>
-          <samples>720</samples>
+          <samples>360</samples>
           <resolution>1</resolution>
           <min_angle>-3.14159</min_angle>
           <max_angle>3.14159</max_angle>
         </horizontal>
       </scan>
       <range>
-        <min>0.10</min>
+        <min>0.15</min>
         <max>6.00</max>
         <resolution>0.01</resolution>
       </range>
@@ -64,9 +65,13 @@
         <stddev>0.01</stddev>
       </noise>
     </ray>
-    <plugin name="gazebo_ros_lidar_controller" filename="libgazebo_ros_laser.so">
-      <topicName>/drlbot/laser/scan</topicName>
-      <frameName>lidar_1</frameName>
+    <plugin name="gazebo_ros_lidar_controller" filename="libgazebo_ros_ray_sensor.so">
+      <!-- <topic_name>/drlbot/laser/scan</topic_name> -->
+      <ros>
+        <remapping>~/out:=/drlbot/laser/scan</remapping>
+      </ros>
+      <output_type>sensor_msgs/LaserScan</output_type>
+      <frame_name>lidar_1</frame_name>
     </plugin>
   </sensor>
 </gazebo>

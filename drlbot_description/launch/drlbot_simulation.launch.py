@@ -1,7 +1,5 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
-import launch
-import launch.actions
 from launch.actions import DeclareLaunchArgument,IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command,PathJoinSubstitution,LaunchConfiguration, PythonExpression
@@ -17,11 +15,13 @@ def generate_launch_description():
     xacro_file = os.path.join(share_dir, 'urdf','drlbot.xacro')
     robot_description_config = xacro.process_file(xacro_file)
     robot_urdf = robot_description_config.toxml()
-    
+
     world_file_name = 'house.world'
     world_path = os.path.join(get_package_share_directory('drlbot_description'), 'worlds', world_file_name)
-
-
+    
+    rviz_file = os.path.join(get_package_share_directory('drlbot_description'), 'launch', 'drlbot_navigation.rviz')
+    
+    
     return LaunchDescription([
         DeclareLaunchArgument('paused', default_value='true'),
         DeclareLaunchArgument('use_sim_time', default_value='true'),
@@ -30,13 +30,13 @@ def generate_launch_description():
         DeclareLaunchArgument('debug', default_value='false'),
         DeclareLaunchArgument('rvizconfig', default_value=PathJoinSubstitution([share_dir, 'rviz', 'urdf.rviz']), description='RViz configuration file'),
         DeclareLaunchArgument('world',default_value = world_path, description = 'Full path to the world model file to load'),
-        # gazeboo,
+        
         Node(
             package='gazebo_ros',
             executable='spawn_entity.py',
             name='spawn_entity',
             output='screen',
-            arguments=['-topic','/robot_description','-entity','spawn_urdf'],
+            arguments=['-topic','/robot_description','-entity','spawn_urdf','-x','0.0','-y','0.0','-z','0.0'],
         ),
         
         Node(
@@ -47,12 +47,12 @@ def generate_launch_description():
             parameters=[{'robot_description': robot_urdf}]
         ),
 
-        # Node(
-        #     package='joint_state_publisher',
-        #     executable='joint_state_publisher',
-        #     name='joint_state_publisher',
-        #     output='screen',
-        # ),
+        Node(
+            package='joint_state_publisher',
+            executable='joint_state_publisher',
+            name='joint_state_publisher',
+            output='screen',
+        ),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
@@ -80,11 +80,11 @@ def generate_launch_description():
                 ]),
             ])
         ),
-        # Node(
-        #     package='rviz2',
-        #     executable='rviz2',
-        #     name='rviz',
-        #     output='screen',
-        #     arguments=['-d', LaunchConfiguration('rvizconfig')]
-        # ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz',
+            output='screen',
+            arguments=['-d', rviz_file]
+        ),
     ])

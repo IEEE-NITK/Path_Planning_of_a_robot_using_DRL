@@ -50,8 +50,7 @@ def generate_launch_description():
             executable='rviz2',
             name='rviz',
             output='screen',
-            arguments=['-d', LaunchConfiguration('rvizconfig')],
-            condition=IfCondition(LaunchConfiguration('gui'))
+            arguments=['-d', LaunchConfiguration('rvizconfig')]
         ),
     ])
 

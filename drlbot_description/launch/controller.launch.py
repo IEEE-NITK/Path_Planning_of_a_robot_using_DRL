@@ -11,18 +11,23 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
     share_dir = get_package_share_directory('drlbot_description')
+
+    xacro_file = os.path.join(share_dir, 'urdf','drlbot.xacro')
+    robot_description_config = xacro.process_file(xacro_file)
+    robot_urdf = robot_description_config.toxml()
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'controller_config',
-            default_value=PathJoinSubstitution([share_dir, 'config', 'controller.yaml']),
+            default_value=os.path.join(get_package_share_directory('drlbot_description') ,'config', 'controller.yaml'),
             description='Path to the controller configuration file'
         ),
 
         # Start the controller spawner node
         Node(
             package='controller_manager',
-            executable='controller_spawner',
-            name='controller_spawner',
+            executable='spawner.py',
+            name='spawner',
             namespace='drlbot',
             output='screen',
             arguments=['controller_config']
@@ -34,6 +39,7 @@ def generate_launch_description():
             executable='robot_state_publisher',
             name='robot_state_publisher',
             output='screen',
+            parameters=[{'robot_description': robot_urdf}],
             remappings=[('/joint_states', '/drlbot/joint_states')],
         )
     ])
