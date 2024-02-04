@@ -8,6 +8,9 @@
   <license>TODO: License declaration</license>
 
   <depend>rclpy</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+
 
   <!-- <build_depend>controller_manager</build_depend> 
   <exec_depend>controller_manager</exec_depend> -->
@@ -16,9 +19,11 @@
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
-  
+
   <exec_depend>gazebo_ros</exec_depend>
   <exec_depend>ros2launch</exec_depend>
+
+  
 
   <depend>robot_state_publisher</depend>
   <depend>joint_state_publisher</depend>

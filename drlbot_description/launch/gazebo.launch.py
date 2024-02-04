@@ -47,12 +47,12 @@ def generate_launch_description():
             parameters=[{'robot_description': robot_urdf}]
         ),
 
-        # Node(
-        #     package='joint_state_publisher',
-        #     executable='joint_state_publisher',
-        #     name='joint_state_publisher',
-        #     output='screen',
-        # ),
+        Node(
+            package='joint_state_publisher',
+            executable='joint_state_publisher',
+            name='joint_state_publisher',
+            output='screen',
+        ),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
@@ -80,11 +80,11 @@ def generate_launch_description():
                 ]),
             ])
         ),
-        # Node(
-        #     package='rviz2',
-        #     executable='rviz2',
-        #     name='rviz',
-        #     output='screen',
-        #     arguments=['-d', LaunchConfiguration('rvizconfig')]
-        # ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz',
+            output='screen',
+            arguments=['-d', LaunchConfiguration('rvizconfig')]
+        ),
     ])
