@@ -76,8 +76,8 @@ class ObstacleAvoidanceEnv(Env):
         self.max_episode_steps = 5000
 
         # Initialize environment variables (replace with your simulation setup)
-        self.robot = ...  # Initialize robot object
-        self.lidar = ...  # Initialize lidar sensor
+        # self.robot = ...  # Initialize robot object
+        # self.lidar = ...  # Initialize lidar sensor
 
         # Reset the environment
         self.reset()

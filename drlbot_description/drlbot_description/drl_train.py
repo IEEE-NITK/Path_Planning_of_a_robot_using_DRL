@@ -452,7 +452,8 @@ class GazeboEnv(Node):
         self.change_goal()
         # randomly scatter boxes in the environment
         self.random_box()
-        self.publish_markers([0.0, 0.0])
+        env.get_logger().info("Random boxes kept")
+        #self.publish_markers([0.0, 0.0])
 
         while not self.unpause.wait_for_service(timeout_sec=1.0):
             self.node.get_logger().info('service not available, waiting again...')
@@ -519,6 +520,8 @@ class GazeboEnv(Node):
             self.goal_x = self.odom_x + random.uniform(self.upper, self.lower)
             self.goal_y = self.odom_y + random.uniform(self.upper, self.lower)
             goal_ok = check_pos(self.goal_x, self.goal_y)
+
+        env.get_logger().info(f"goalx , goal y :{self.goal_x},{self.goal_y}")
 
     def random_box(self):
         # Randomly change the location of the boxes in the environment on each reset to randomize the training
@@ -659,19 +662,20 @@ class Lidar_subscriber(Node):
         )
         self.subscription
 
-        self.gaps = [[-np.pi / 2 - 0.03, -np.pi / 2 + np.pi / environment_dim]]
-        for m in range(environment_dim - 1):
-            self.gaps.append(
-                [self.gaps[m][1], self.gaps[m][1] + np.pi / environment_dim]
-            )
-        self.gaps[-1][-1] += 0.03
+        # self.gaps = [[-np.pi / 2 - 0.03, -np.pi / 2 + np.pi / environment_dim]]
+        # for m in range(environment_dim - 1):
+        #     self.gaps.append(
+        #         [self.gaps[m][1], self.gaps[m][1] + np.pi / environment_dim]
+        #     )
+        # self.gaps[-1][-1] += 0.03
 
     def lidar_callback(self, v):
         global lidar_data
         data = v.ranges[90:270]
-        data[~np.isfinite(np.array(data))] = 10
+        data[~np.isfinite(np.array(data))] = 10.0000000
         data=np.array(data)
         lidar_data = data[::9]
+        env.get_logger().info(lidar_data.shape)
 
 
 class ReplayBuffer(object):
@@ -741,7 +745,7 @@ buffer_size = 1e6  # Maximum size of the buffer
 file_name = "td3_lidar"  # name of the file to store the policy
 save_model = True  # Weather to save the model or not
 load_model = False  # Weather to load a stored model
-random_near_obstacle = True  # To take random actions near obstacles or not
+random_near_obstacle = False  # To take random actions near obstacles or not
 
 # Create the network storage folders
 # if not os.path.exists("./results"):
@@ -844,9 +848,10 @@ try:
             # This is done to increase exploration in situations near obstacles.
             # Training can also be performed without it
             if random_near_obstacle:
+                env.get_logger().info("Taking random actions")
                 if (
                     np.random.uniform(0, 1) > 0.85
-                    and min(state[4:-8]) < 0.6
+                    and min(state[4:-8]) < 0.3
                     and count_rand_actions < 1
                 ):
                     count_rand_actions = np.random.randint(8, 15)
